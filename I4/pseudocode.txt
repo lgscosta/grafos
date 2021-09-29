@@ -1,0 +1,123 @@
+
+conjunto 1:
+    tipo: pessoas
+    formato: "pn" onde 'n' é o id.
+    grau: 2 (multiplicado pelo numero de camisas dividido por 6) + 1 (duas camisas e vértice fonte)
+    
+conjunto 2:
+    tipo: camisas
+    formato: "tn" onde 't' é o tamanho e 'n' é o id.
+    grau: indefinido (no mínimo 1, vértice sumidouro)
+
+vértice fonte
+    tipo: vértice base
+    formato: "s"
+    grau: n, onde 'n' é o número de pessoas
+    
+vértice sumidouro
+    tipo: vértice base
+    formato: "t"
+    grau: n, onde 'n' é o número de camisas
+
+Ideia:  Criar três grafos (fonte, relacional, sumidouro)
+        Unificar os grafos em ordem
+        Criar função Ford-Fulkerson
+        Criar função Dijkstra
+        
+
+Pergutas:   É pra usar o fluxo máximo ou mínimo?
+            Como usar Dijkstra integrado?
+            Como descobre se é possível fazer a distribuição?
+            Qual o valor da aresta?
+
+Infos:  O numero de camisas é sempre múltiplo de 6 e tem um de cada numeração
+        Se a pessoa já tiver uma camisa o caminho dela com o "s" será 0.
+        Se a camisa já tiver uma pessoa o caminho dela com o "t" será 0.
+
+
+Brainstorming:
+    Luana Costa, [28.09.21 16:02]
+    quando finalizar o fordismo la
+
+    Luana Costa, [28.09.21 16:02]
+    kakakakak rlx
+
+    Beatriz Maia 🐿, [28.09.21 16:02]
+    dfjksdfhkdshfkjds
+
+    Beatriz Maia 🐿, [28.09.21 16:02]
+    quando mudar os meios de produção
+
+    Luana Costa, [28.09.21 16:02]
+    nao vai ter conexao entre a fonte e o sumidouro
+
+    Luana Costa, [28.09.21 16:02]
+    sodufaosdufhyasodfyasuod
+
+    Luana Costa, [28.09.21 16:02]
+    ta
+
+    Luana Costa, [28.09.21 16:03]
+    olha o que to pensando
+
+    Luana Costa, [28.09.21 16:03]
+    ai faz uma verificação
+
+    Luana Costa, [28.09.21 16:03]
+    pra ver se todas as pessoas estao ligadas a uma camisa
+
+    Luana Costa, [28.09.21 16:03]
+    se nao
+
+    Luana Costa, [28.09.21 16:04]
+    as que restaram vao estar em subgrafos
+
+    Beatriz Maia 🐿, [28.09.21 16:04]
+    hmmmmm acho q ta fazendo sentido
+
+    Luana Costa, [28.09.21 16:04]
+    ai aplica dijkstra pra achar a camisa mais "proxima"
+
+    Beatriz Maia 🐿, [28.09.21 16:04]
+    e tbm o caminho q chega em todos os vertices
+
+    Luana Costa, [28.09.21 16:04]
+    por fim se passar a verificação e ainda estiver com pessoas faltando
+
+    Luana Costa, [28.09.21 16:04]
+    ai deu ruim
+
+    Luana Costa, [28.09.21 16:04]
+    [In reply to Beatriz Maia 🐿]
+    ss
+
+    Beatriz Maia 🐿, [28.09.21 16:04]
+    sim
+
+    Beatriz Maia 🐿, [28.09.21 16:05]
+    faz sentido faz sentido
+
+    Luana Costa, [28.09.21 16:05]
+    tem muitos furos na logica ainda
+
+Realizing:
+    Luana Costa, [28.09.21 16:30]
+    vamos supor que duas pessoas estao conectadas na mesma camisa
+
+    Luana Costa, [28.09.21 16:30]
+    ai seria tipo
+
+    Luana Costa, [28.09.21 16:31]
+    s -> bea -> small -> sophie -> extra small -> t
+
+    Luana Costa, [28.09.21 16:31]
+    duas formas de evitar isso: usar digrafo
+
+    Luana Costa, [28.09.21 16:32]
+    ou usar dijkstra pra achar o menor caminho
+
+    Luana Costa, [28.09.21 16:32]
+    que vai ser necessariamente uma pessoa e uma camisa
+
+    Luana Costa, [28.09.21 16:32]
+    desculpa to te usando de brainstorming

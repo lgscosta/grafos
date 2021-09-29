@@ -71,22 +71,22 @@ class Reader{
 };
 
 class Aresta{
-    int vertice1;
-    int vertice2;
+    string vertice1;
+    string vertice2;
     int peso;
 
 public:
-    Aresta(int v1, int v2, int p){
+    Aresta(string v1, string v2, int p){
         vertice1 = v1;
         vertice2 = v2;
         peso = p;
     }
 
-    int returnV1(){
+    string returnV1(){
         return vertice1;
     }
 
-    int returnV2(){
+    string returnV2(){
         return vertice2;
     }
 
@@ -94,9 +94,12 @@ public:
         return peso;
     }
 
-    bool operator < (const Aresta& aresta2) const{
-        return (peso < aresta2.peso);
+    Aresta emagrece(Aresta antiga){
+        antiga.peso = 0;
+
+        return antiga;
     }
+
 };
 
 class Grafo{
@@ -108,12 +111,52 @@ public:
         V = nVertice;
     }
 
-    Grafo criaFonte(){
-
+    string concatID(string name, int number){
+        return name + to_string(number);
     }
 
-    Grafo criaSumidouro(){
+    void inserePessoa(string pessoa, string tam2, int n){
+        int count = n/6;
+        int peso = 1;
+
+        for(int i = 0; i < count; i++){
+            Aresta aresta(pessoa, concatID(tam2, i+1), peso);
+            arestas.push_back(aresta);
+        } 
+    }
+
+    void insereFonte(int n){
+        int peso = 1;
         
+        for(int i = 0; i < n; i++){
+            Aresta aresta("s",  concatID("p", i+1), peso);
+            arestas.push_back(aresta);
+        }
+    }
+
+    void insereSumidouro(int n){
+        int count = n/6;
+        int peso = 1;
+
+        for(int i = 0; i < count; i++){
+            Aresta arestaXXL = Aresta( concatID("XXL", i+1), "t", peso);
+            arestas.push_back(arestaXXL);
+
+            Aresta arestaXL = Aresta( concatID("XL", i+1), "t", peso);
+            arestas.push_back(arestaXL);
+
+            Aresta arestaL = Aresta( concatID("L", i+1), "t", peso);
+            arestas.push_back(arestaL);
+
+            Aresta arestaM = Aresta( concatID("M", i+1), "t", peso);
+            arestas.push_back(arestaM);
+
+            Aresta arestaS = Aresta( concatID("S", i+1), "t", peso);
+            arestas.push_back(arestaS);
+
+            Aresta arestaXS = Aresta( concatID("XS", i+1), "t", peso);
+            arestas.push_back(arestaXS);
+        }
     }
 };
 

@@ -41,7 +41,7 @@ class Reader{
     Reader(){
     }
 
-    int readCase(){
+    /*int readCase(){
         // list <Tuple> :: iterator it;
         Tuple tup = Tuple("luana", "eduardo");
         
@@ -72,44 +72,75 @@ class Reader{
         // }
         
         return 1;
+    }*/
+
+    int readCase(){
+        // list <Tuple> :: iterator it;
+        Tuple tup = Tuple("luana", "eduardo");
+        
+        string s1;
+        string s2;
+        int shirts;
+        int volunteers;
+
+        cin >> shirts >> volunteers;
+
+        int count = shirts + volunteers + 1; // seria mais 2 (fonte e sumidouro)
+                                             // mas vetor é 1 a menos
+        vector<Tuple> ids = listaID(volunteers, shirts);
+        int matriz[count][count];
+
+        // inicializa a matriz
+        for(int i = 0; i < count; i++){
+            for(int j = 0; j < count; j++){
+                matriz[i][j] = 0;
+            }
+        }
+
+        // relação s e pessoas
+        for(int i = 0; i < volunteers; i++){
+            matriz[0][i+2] = 1; // i + 2 porque 0 = s e 1 = t.
+        }
+
+        // relação t e camisas
+        for(int i = 0; i < volunteers; i++){
+            matriz[0][i+2+volunteers] = 1;
+        }
+
+
+        vector<Tuple> sizes;
+        int a = volunteers;
+
+        int index = shirts/6;
+        int camisa1 = 2 + volunteers;
+
+        // relação camisas e pessoas
+        while(int i = 0; i < volunteers; i++){
+            cin >> s1 >> s2;
+            camisa1 = camisa1 + i;
+            
+            for(int j = 0; j < index; j++){
+                camisa1 = camisa1 + j;
+                matriz[i+2][camisa1] = 1;
+            }
+        }
+
+        /*while(a != 0){
+            cout << "=" << a << "=" << endl;
+            cin >> s1 >> s2;
+            Tuple aux = Tuple(s1, s2);
+            sizes.push_back(aux);
+
+            a--;
+        }*/
+        
+        return 1;
     }
-};
-
-class Aresta{
-    string vertice1;
-    string vertice2;
-    int peso;
-
-public:
-    Aresta(string v1, string v2, int p){
-        vertice1 = v1;
-        vertice2 = v2;
-        peso = p;
-    }
-
-    string returnV1(){
-        return vertice1;
-    }
-
-    string returnV2(){
-        return vertice2;
-    }
-
-    int balanca(){
-        return peso;
-    }
-
-    Aresta emagrece(Aresta antiga){
-        antiga.peso = 0;
-
-        return antiga;
-    }
-
 };
 
 class Grafo{
     int V; 
-    vector<Aresta> arestas;
+    int grafo[V][V];
 
 public:
     Grafo(int nVertice){
@@ -120,52 +151,12 @@ public:
         V = n;
     }
 
+    void alteraGrafo(int novo[N][N]){
+        grafo = novo;
+    }
+
     string concatID(string name, int number){
         return name + to_string(number);
-    }
-
-    void inserePessoa(string pessoa, string tam2, int n){
-        int count = n/6;
-        int peso = 1;
-
-        for(int i = 0; i < count; i++){
-            Aresta aresta(pessoa, concatID(tam2, i+1), peso);
-            arestas.push_back(aresta);
-        } 
-    }
-
-    void insereFonte(int n){
-        int peso = 1;
-        
-        for(int i = 0; i < n; i++){
-            Aresta aresta("s",  concatID("p", i+1), peso);
-            arestas.push_back(aresta);
-        }
-    }
-
-    void insereSumidouro(int n){
-        int count = n/6;
-        int peso = 1;
-
-        for(int i = 0; i < count; i++){
-            Aresta arestaXXL = Aresta( concatID("XXL", i+1), "t", peso);
-            arestas.push_back(arestaXXL);
-
-            Aresta arestaXL = Aresta( concatID("XL", i+1), "t", peso);
-            arestas.push_back(arestaXL);
-
-            Aresta arestaL = Aresta( concatID("L", i+1), "t", peso);
-            arestas.push_back(arestaL);
-
-            Aresta arestaM = Aresta( concatID("M", i+1), "t", peso);
-            arestas.push_back(arestaM);
-
-            Aresta arestaS = Aresta( concatID("S", i+1), "t", peso);
-            arestas.push_back(arestaS);
-
-            Aresta arestaXS = Aresta( concatID("XS", i+1), "t", peso);
-            arestas.push_back(arestaXS);
-        }
     }
 
     vector<Tuple> listaID(int pessoas, int camisas){
@@ -184,12 +175,26 @@ public:
 
         for(int i = 0; i < count; i++){
             lista.push_back(changeTuple(concatID("XXL", i+1)));
+        }
+
+        for(int i = 0; i < count; i++){
             lista.push_back(changeTuple(concatID("XL", i+1)));
+        }
+            
+        for(int i = 0; i < count; i++){
             lista.push_back(changeTuple(concatID("L", i+1)));
+        }
+            
+        for(int i = 0; i < count; i++){
             lista.push_back(changeTuple(concatID("M", i+1)));
+        }
+            
+        for(int i = 0; i < count; i++){
             lista.push_back(changeTuple(concatID("S", i+1)));
+        }
+            
+        for(int i = 0; i < count; i++){
             lista.push_back(changeTuple(concatID("XS", i+1)));
-            number++;
         }
     }
 
